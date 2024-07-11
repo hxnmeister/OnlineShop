@@ -263,3 +263,4 @@ C:\Users\Chaklun\Documents\GitHub\OnlineShop\bin\Debug\net8.0\runtimes\win\lib\n
 C:\Users\Chaklun\Documents\GitHub\OnlineShop\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\Chaklun\Documents\GitHub\OnlineShop\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Chaklun\Documents\GitHub\OnlineShop\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\Chaklun\Documents\GitHub\OnlineShop\obj\Debug\net8.0\OnlineShop.sourcelink.json
