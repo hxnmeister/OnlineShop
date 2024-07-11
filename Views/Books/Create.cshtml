@@ -1,0 +1,20 @@
+﻿@model OnlineShop.Models.Book
+
+@{
+    ViewData["Title"] = "Creating book...";
+}
+
+<h1>Create a Book</h1>
+<hr />
+
+<partial name="_BookFormPartial" model="Model"/>
+
+<div>
+    <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
