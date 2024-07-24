@@ -37,21 +37,22 @@ namespace OnlineShop.Controllers
             {
                 if ((await _context.Users.FirstOrDefaultAsync(item => item.Email == user.Email)) != null)
                 {
-                    ModelState.AddModelError("Login", "Such login is already using!");
+                    ModelState.AddModelError("Email", "Such email is already using!");
 
                     return View(user);
                 }
                 else if ((await _context.Users.FirstOrDefaultAsync(item => item.Login == user.Login)) != null)
                 {
-                    ModelState.AddModelError("Email", "Such email is already using!");
+                    ModelState.AddModelError("Login", "Such login is already using!");
 
                     return View(user);
                 }
 
                     
 
-                User newUser = new User()
+                User newUser = new()
                 {
+                    Id = (int)(user.Id == null ? _context.Users.Count() + 1 : user.Id),
                     Login = user.Login,
                     Password = user.Password,
                     FirstName = user.FirstName, 
