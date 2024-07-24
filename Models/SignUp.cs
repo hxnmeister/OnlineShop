@@ -6,8 +6,7 @@ namespace OnlineShop.Models
 {
     public class SignUp
     {
-        [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [RequiredMessage(fieldName: "Login")]
         [DisplayName(displayName: "Login")]
