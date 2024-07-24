@@ -25,10 +25,9 @@ namespace OnlineShop.Models
         [DisplayName(displayName: "Genre")]
         public required string Genre { get; set; }
 
-        [RequiredMessage(fieldName: "Rating")]
         [Range(minimum: 1, maximum: 5, ErrorMessage = "Rating value must be between 1 and 5!")]
         [DisplayName(displayName: "Rating")]
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
 
         [Range(minimum: 1, maximum: int.MaxValue, ErrorMessage = "There is must be at least 1 page in book!")]
         [DisplayName(displayName: "Pages")]
@@ -40,7 +39,7 @@ namespace OnlineShop.Models
         public decimal Price { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal PreviousPrice { get; set; }
+        public decimal? PreviousPrice { get; set; }
 
         [StringLengthMessage(maximumLength: 150, fieldName: "Author")]
         [DisplayName(displayName: "Author")]

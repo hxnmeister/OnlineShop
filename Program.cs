@@ -7,6 +7,7 @@ var configuration = builder.Configuration;
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<OnlineShopDBContext>(options => options.UseSqlServer(configuration.GetConnectionString(DEFAULT_DB_CONNECTION_KEY)));
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 

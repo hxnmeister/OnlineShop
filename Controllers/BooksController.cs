@@ -131,8 +131,8 @@ namespace OnlineShop.Controllers
                 return NotFound();
             }
 
-            var book = await _context.Books
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var book = await _context.Books.FirstOrDefaultAsync(m => m.Id == id);
+
             if (book == null)
             {
                 return NotFound();

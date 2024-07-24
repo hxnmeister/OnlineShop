@@ -19,7 +19,7 @@ namespace OnlineShop.Migrations
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PublisherName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Genre = table.Column<string>(type: "nvarchar(55)", maxLength: 55, nullable: false),
-                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: true),
                     PagesAmount = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PreviousPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),

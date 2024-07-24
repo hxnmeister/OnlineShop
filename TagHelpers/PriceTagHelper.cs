@@ -9,7 +9,7 @@ namespace OnlineShop.TagHelpers
         public decimal CurrentPrice { get; set; }
 
         [HtmlAttributeName(name: "previous-price")]
-        public decimal PreviousPrice { get; set; }
+        public decimal? PreviousPrice { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {

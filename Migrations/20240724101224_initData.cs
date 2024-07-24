@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace OnlineShop.Migrations
 {
-    public partial class iniDbData : Migration
+    /// <inheritdoc />
+    public partial class initData : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.InsertData
@@ -35,6 +39,7 @@ namespace OnlineShop.Migrations
                 );
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData
