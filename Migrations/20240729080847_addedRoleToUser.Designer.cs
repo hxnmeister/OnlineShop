@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Data;
 
@@ -11,9 +12,11 @@ using OnlineShop.Data;
 namespace OnlineShop.Migrations
 {
     [DbContext(typeof(OnlineShopDBContext))]
-    partial class OnlineShopDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240729080847_addedRoleToUser")]
+    partial class addedRoleToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,37 +72,6 @@ namespace OnlineShop.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("OnlineShop.Models.Feedback", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Body")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Feedbacks");
-                });
-
             modelBuilder.Entity("OnlineShop.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -132,40 +104,12 @@ namespace OnlineShop.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("OnlineShop.Models.Feedback", b =>
-                {
-                    b.HasOne("OnlineShop.Models.Book", "Book")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OnlineShop.Models.User", "User")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Book");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("OnlineShop.Models.Book", b =>
-                {
-                    b.Navigation("Feedbacks");
-                });
-
-            modelBuilder.Entity("OnlineShop.Models.User", b =>
-                {
-                    b.Navigation("Feedbacks");
                 });
 #pragma warning restore 612, 618
         }

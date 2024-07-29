@@ -33,5 +33,9 @@ namespace OnlineShop.Models
         [Range(minimum: 16, maximum: 100, ErrorMessage = "Value for Age must be between 16 and 100!")]
         [DisplayName(displayName: "Age")]
         public int? Age { get; set; }
+
+        public virtual IEnumerable<Feedback> Feedbacks { get; set; }
+
+        public string? Role { get; set; } = "USER";
     }
 }

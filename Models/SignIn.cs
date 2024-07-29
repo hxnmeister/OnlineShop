@@ -17,5 +17,7 @@ namespace OnlineShop.Models
         [Compare(otherProperty: "Password", ErrorMessage = "Passwords didn`t match!")]
         [DisplayName(displayName: "Repeat password")]
         public required string RepeatPassword { get; set; }
+
+        public string Role { get; set; } = "USER";
     }
 }

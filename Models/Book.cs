@@ -48,6 +48,8 @@ namespace OnlineShop.Models
         [DisplayName(displayName: "Url to image")]
         public string? ImageUrl { get; set; }
 
+        public virtual IEnumerable<Feedback> Feedbacks { get; set; }
+
         public override string ToString()
         {
             return $"Title: {this.Title}\n" +

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Data;
+using OnlineShop.Filters;
 using OnlineShop.Models;
+using OnlineShop.Services;
 
 namespace OnlineShop.Controllers
 {
@@ -40,6 +42,7 @@ namespace OnlineShop.Controllers
         }
 
         // GET: Books/Create
+        [UserAuth(userRoles: ["ADMIN"])]
         [HttpGet(template: "books/create")]
         public IActionResult Create()
         {
@@ -47,6 +50,7 @@ namespace OnlineShop.Controllers
         }
 
         // POST: Books/Create
+        [UserAuth(userRoles: ["ADMIN"])]
         [HttpPost(template: "books/create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,PublisherName,Genre,Rating,PagesAmount,Price,PreviousPrice,Author,ImageUrl")] Book book)
@@ -61,6 +65,7 @@ namespace OnlineShop.Controllers
         }
 
         // GET: Books/Edit/5
+        [UserAuth(userRoles: ["ADMIN"])]
         [HttpGet(template: "books/edit/{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -79,6 +84,7 @@ namespace OnlineShop.Controllers
         }
 
         // POST: Books/Edit/5
+        [UserAuth(userRoles: ["ADMIN"])]
         [HttpPost(template: "books/edit/{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,PublisherName,Genre,Rating,PagesAmount,Price,PreviousPrice,Author,ImageUrl")] Book book)
@@ -123,6 +129,7 @@ namespace OnlineShop.Controllers
         }
 
         // GET: Books/Delete/5
+        [UserAuth(userRoles: ["ADMIN"])]
         [HttpGet(template: "books/delete/{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -142,6 +149,7 @@ namespace OnlineShop.Controllers
         }
 
         // POST: Books/Delete/5
+        [UserAuth(userRoles: ["ADMIN"])]
         [HttpPost(template: "books/delete/{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

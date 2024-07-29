@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using OnlineShop.Data;
@@ -15,12 +9,19 @@ namespace OnlineShop.Controllers
     public class UsersController : Controller
     {
         private readonly OnlineShopDBContext _context;
+        private readonly IConfiguration _configuration;
         private readonly IMemoryCache _cache;
+        private readonly string currentUserRoleKey;
+        private readonly string currentUserLoginKey;
 
-        public UsersController(OnlineShopDBContext context, IMemoryCache cache)
+        public UsersController(OnlineShopDBContext context, IMemoryCache cache, IConfiguration configuration)
         {
             _context = context;
             _cache = cache;
+            _configuration = configuration;
+
+            currentUserRoleKey = _configuration["SessionSettings:CurrentUserRoleKey"] ?? "current_user_role";
+            currentUserLoginKey = _configuration["SessionSettings:CurrentUserLoginKey"] ?? "current_user_login";
         }
 
         [HttpGet(template: "signup")]
@@ -92,7 +93,24 @@ namespace OnlineShop.Controllers
                 return View(user);
             }
 
+            HttpContext.Session.SetString(currentUserLoginKey, currentUser.Login);
+            HttpContext.Session.SetString(currentUserRoleKey, currentUser.Role);
+
             return RedirectToAction("Index", "Books");
+        }
+
+        [HttpGet(template: "logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove(currentUserRoleKey);
+            HttpContext.Session.Remove(currentUserLoginKey);
+            return RedirectToAction("Index", "Books");
+        }
+
+        [HttpGet(template: "access-denied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

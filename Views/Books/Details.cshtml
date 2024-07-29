@@ -2,14 +2,21 @@
 
 @{
     ViewData["Title"] = "Details";
+    TempData["BookId"] = Model.Id;
 }
 
-
-
-<partial name="_BookDetailsPartial" model="Model"/>
+<partial name="_BookDetailsPartial" model="Model" />
 
 <div>
-    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model?.Id">Delete</a>
-    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
     <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+
+    @if (userService.IsAdmin())
+    {
+        <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model?.Id">Delete</a>
+        <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    }
+    @if (userService.IsAdmin() || userService.IsCommonUser())
+    {
+        <a class="btn btn-outline-primary" asp-action="Create" asp-controller="Feedbacks">Leave a feedback</a>
+    }
 </div>
