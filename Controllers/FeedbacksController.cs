@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.Data;
 using OnlineShop.Filters;
@@ -25,7 +20,7 @@ namespace OnlineShop.Controllers
             currentUserLoginKey = _configuration["SessionSettings:CurrentUserLoginKey"] ?? "current_user_login";
         }
 
-        [HttpGet]
+        [HttpGet(template: "feedback/create")]
         [UserAuth(userRoles: ["USER", "ADMIN"])]
         public IActionResult Create()
         {
@@ -33,7 +28,7 @@ namespace OnlineShop.Controllers
         }
 
         // POST: Feedbacks/Create
-        [HttpPost]
+        [HttpPost(template: "feedback/create")]
         [UserAuth(userRoles: ["USER", "ADMIN"])]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind([ "Title", "Body" ])]Feedback feedback, int bookId)
@@ -59,65 +54,8 @@ namespace OnlineShop.Controllers
             return View(feedback);
         }
 
-        // GET: Feedbacks/Edit/5
-        [HttpGet]
-        [UserAuth(userRoles: ["USER", "ADMIN"])]
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var feedback = await _context.Feedbacks.FindAsync(id);
-            if (feedback == null)
-            {
-                return NotFound();
-            }
-            ViewData["BookId"] = new SelectList(_context.Books, "Id", "Genre", feedback.BookId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Email", feedback.UserId);
-            return View(feedback);
-        }
-
-        // POST: Feedbacks/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [UserAuth(userRoles: ["USER", "ADMIN"])]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Body,BookId,UserId")] Feedback feedback)
-        {
-            if (id != feedback.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(feedback);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FeedbackExists(feedback.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-
-            return View(feedback);
-        }
-
         // GET: Feedbacks/Delete/5
-        [HttpGet]
+        [HttpGet(template: "feedback/delete/{id}")]
         [UserAuth(userRoles: ["USER", "ADMIN"])]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -130,6 +68,7 @@ namespace OnlineShop.Controllers
                 .Include(f => f.Book)
                 .Include(f => f.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (feedback == null)
             {
                 return NotFound();
@@ -139,19 +78,23 @@ namespace OnlineShop.Controllers
         }
 
         // POST: Feedbacks/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost(template: "feedback/delete/{id}"), ActionName("Delete")]
         [UserAuth(userRoles: ["USER", "ADMIN"])]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var feedback = await _context.Feedbacks.FindAsync(id);
+
             if (feedback != null)
             {
+                int bookId = feedback.BookId;
                 _context.Feedbacks.Remove(feedback);
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", "Books", new { id = bookId });
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Books");
         }
 
         private bool FeedbackExists(int id)

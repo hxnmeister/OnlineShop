@@ -34,7 +34,7 @@ namespace OnlineShop.Models
         [DisplayName(displayName: "Age")]
         public int? Age { get; set; }
 
-        public virtual IEnumerable<Feedback> Feedbacks { get; set; }
+        public virtual IEnumerable<Feedback>? Feedbacks { get; set; }
 
         public string? Role { get; set; } = "USER";
     }

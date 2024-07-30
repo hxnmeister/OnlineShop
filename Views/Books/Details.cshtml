@@ -6,6 +6,7 @@
 }
 
 <partial name="_BookDetailsPartial" model="Model" />
+<hr />
 
 <div>
     <a class="btn btn-outline-primary" asp-action="Index">Back to List</a>
@@ -15,8 +16,34 @@
         <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@Model?.Id">Delete</a>
         <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
     }
-    @if (userService.IsAdmin() || userService.IsCommonUser())
+    @if (userService.IsAdmin() || userService.IsCommonUser() && !ViewBag?.HasUserLeftFeedback)
     {
         <a class="btn btn-outline-primary" asp-action="Create" asp-controller="Feedbacks">Leave a feedback</a>
     }
 </div>
+<hr />
+
+@if (ViewBag?.Feedbacks != null && ViewBag?.Feedbacks.Count > 0)
+{
+    <h3>Feedbacks:</h3>
+
+    <div class="feedback-container">
+        @foreach(var item in ViewBag.Feedbacks)
+        {
+            <div class="container feedback bg-info bg-opacity-10 border border-info rounded m-2">
+                <p class="fs-5 fw-bold text-decoration-underline mt-2">@item.Title</p>
+                <p class="fs-6 text-secondary">@item.User.Login</p>
+                <p class="fs-6 text-break lh-1 m-3">@item.Body</p>
+
+                @if(item.User.Login.Equals(userService.CurrentUserLogin))
+                {
+                    <div class="container m-3">
+                        <a class="btn btn-outline-danger" asp-action="Delete" asp-controller="Feedbacks" asp-route-id="@item.Id">Remove</a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+
+

@@ -7,20 +7,27 @@
 <h1>Catalog</h1>
 <hr />
 
-<p>
-    <a class="btn btn-outline-success" asp-action="Create">Create New</a>
-</p>
+@if (userService.IsAdmin())
+{
+    <p>
+        <a class="btn btn-outline-success" asp-action="Create">Create New</a>
+    </p>
+}
+
 <div class="container text-center mt-5">
     <div class="row row-cols-4 gy-3 col-8 text-break m-auto">
         @foreach (var book in Model)
         {
-            <a class="link-offset-2 link-underline link-dark link-underline-opacity-0 d-block book-product-card" asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">
-                <img style="height: 100px" src="@Url.Content(book.ImageUrl ?? "~/images/no-product.jpg")" />
-                <p class="mb-0">Title: @book.Title</p>
-                <p class="mb-0">Author: @book.Author</p>
-                <p class="mb-0">Rating: @book.Rating / 5</p>
-                <price current-price="@book.Price" previous-price="@book.PreviousPrice"></price>
-            </a>
+            <div class="container d-block book-product-card">
+                <partial name="_ImageCarouselPartial" model="book"></partial>
+
+                <a class="link-offset-2 link-underline link-dark link-underline-opacity-0 " asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">
+                    <p class="mb-0">Title: @book.Title</p>
+                    <p class="mb-0">Author: @book.Author</p>
+                    <p class="mb-0">Rating: @book.Rating / 5</p>
+                    <price current-price="@book.Price" previous-price="@book.PreviousPrice"></price>
+                </a>
+            </div>
         }
     </div>
 </div>

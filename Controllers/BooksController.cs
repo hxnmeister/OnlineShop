@@ -4,22 +4,25 @@ using OnlineShop.Data;
 using OnlineShop.Filters;
 using OnlineShop.Models;
 using OnlineShop.Services;
+using System.Linq;
 
 namespace OnlineShop.Controllers
 {
     public class BooksController : Controller
     {
         private readonly OnlineShopDBContext _context;
+        private readonly IUserService _userService;
 
-        public BooksController(OnlineShopDBContext context)
+        public BooksController(OnlineShopDBContext context, IUserService userService)
         {
             _context = context;
+            _userService = userService;
         }
 
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Books.ToListAsync());
+            return View(await _context.Books.Include(b => b.BooksImages).ToListAsync());
         }
 
         // GET: Books/Details/5
@@ -31,12 +34,18 @@ namespace OnlineShop.Controllers
                 return NotFound();
             }
 
-            var book = await _context.Books
+            var book = await _context.Books.Include(b => b.BooksImages)
+                .Include(b => b.Feedbacks)
+                .ThenInclude(f => f.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (book == null)
             {
                 return NotFound();
             }
+
+            ViewBag.Feedbacks = book.Feedbacks;
+            ViewBag.HasUserLeftFeedback = book.Feedbacks.Any(f => f.User.Login.Equals(_userService.CurrentUserLogin));
 
             return View(book);
         }

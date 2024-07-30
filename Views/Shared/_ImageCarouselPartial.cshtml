@@ -1,0 +1,29 @@
+﻿@model Book
+
+@{
+    var addColClass = ViewData["addColClass"] != null && (bool)ViewData["addColClass"];
+}
+
+<div id="@Model.Id" class="carousel slide @(addColClass ? "col-3" : "")">
+    <div class="carousel-inner">
+        @if (Model.BooksImages != null && Model.BooksImages.Any())
+        {
+            var first = true;
+            foreach (var item in Model.BooksImages)
+            {
+                <div class="carousel-item @(first ? "active" : "")">
+                    <img src="@item.ImageUrl" class="d-block w-100" alt="@Url.Content("~/images/no-product.jpg")">
+                </div>
+                first = false;
+            }
+        }
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#@Model.Id" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#@Model.Id" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

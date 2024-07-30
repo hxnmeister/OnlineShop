@@ -45,19 +45,8 @@ namespace OnlineShop.Models
         [DisplayName(displayName: "Author")]
         public string? Author { get; set; }
 
-        [DisplayName(displayName: "Url to image")]
-        public string? ImageUrl { get; set; }
+        public virtual IEnumerable<Feedback>? Feedbacks { get; set; }
 
-        public virtual IEnumerable<Feedback> Feedbacks { get; set; }
-
-        public override string ToString()
-        {
-            return $"Title: {this.Title}\n" +
-                   $"Publisher: {this.PublisherName}\n" +
-                   $"Genre: {this.Genre}\n" +
-                   $"Rating: {this.Rating}\n" +
-                   $"Price: {this.Price}" +
-                   $"Author(-s): {this.Author}";
-        }
+        public virtual IEnumerable<BooksImages>? BooksImages { get; set; }
     }
 }

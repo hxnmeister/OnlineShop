@@ -33,11 +33,12 @@ body {
     box-shadow: 2px 2px 5px black;
 }
 
-.partial-container {
-    flex: 1;
-    margin-right: 20px;
+.feedback-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 15px;
 }
 
-.form-container {
-    flex: 0 0 auto;
+.feedback {
+    margin-bottom: 10px;
 }
