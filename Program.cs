@@ -15,6 +15,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddSingleton<ICartService, CartService>();
 builder.Services.AddScoped<IUserService>(provider =>
 {
     var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();

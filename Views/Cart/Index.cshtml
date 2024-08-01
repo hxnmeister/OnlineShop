@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+}
+
+@if(cartService.CartItems.Count > 0)
+{
+    @foreach (var item in cartService.CartItems)
+    {
+        <div class="container border rounded m-3">
+            <p class="m-3">@item.Book.Author @item.Book.Title - @item.Quantity</p>
+
+            <form method="post" asp-controller="Cart" asp-action="RemoveFromCart" class="m-3">
+                <input type="hidden" name="bookId" value="@item.Book.Id" />
+                <button type="submit" class="btn btn-outline-danger">Remove item</button>
+            </form>
+        </div>
+    }
+
+    <a class="btn btn-outline-success" asp-action="Checkout" asp-controller="Cart">Procced to checkout</a>
+}
+else
+{
+    <h2 class="text-center">Cart is empty!</h2>
+}

@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Chaklun\\Documents\\GitHub\\OnlineShop\\wwwroot\\images\\cart.png",
+      "PackagePath": "staticwebassets\\images\\cart.png"
+    },
+    {
       "Id": "C:\\Users\\Chaklun\\Documents\\GitHub\\OnlineShop\\wwwroot\\images\\no-product.jpg",
       "PackagePath": "staticwebassets\\images\\no-product.jpg"
     },

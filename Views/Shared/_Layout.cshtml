@@ -42,6 +42,14 @@
                                 <a class="nav-link text-dark btn btn-warning" asp-area="" asp-controller="Users" asp-action="Logout">Logout</a>
                             </li>
                         }
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="Index">
+                                <span class="bi bi-cart"></span>
+                                <span class="badge bg-secondary">@cartService.CartItems.Count</span>
+                                <span>@string.Format("{0:C}", cartService.GetTotalPrice())</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

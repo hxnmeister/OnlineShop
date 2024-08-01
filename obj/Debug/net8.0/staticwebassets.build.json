@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VUA/aN+3osVnXSDFqVjk1p3uprJLBKQGatFzoeMIhuE=",
+  "Hash": "E68Z0MuG+se1WdeLeybQwspGGRI3nbkfDnl9dEqKSvk=",
   "Source": "OnlineShop",
   "BasePath": "_content/OnlineShop",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Chaklun\\Documents\\GitHub\\OnlineShop\\wwwroot\\images\\cart.png",
+      "SourceId": "OnlineShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Chaklun\\Documents\\GitHub\\OnlineShop\\wwwroot\\",
+      "BasePath": "_content/OnlineShop",
+      "RelativePath": "images/cart.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\cart.png"
     },
     {
       "Identity": "C:\\Users\\Chaklun\\Documents\\GitHub\\OnlineShop\\wwwroot\\images\\no-product.jpg",

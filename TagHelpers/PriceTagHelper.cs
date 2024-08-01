@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+using OnlineShop.Services.Implementations;
 
 namespace OnlineShop.TagHelpers
 {
@@ -13,8 +14,8 @@ namespace OnlineShop.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            string previousPriceHtml = PreviousPrice > 0 ? $"<span class='text-decoration-line-through text-danger'>{PreviousPrice:F2}$</span>" : string.Empty;
-            string currentPriceHtml = $"<span class='ms-2'>{CurrentPrice:F2}$</span>";
+            string previousPriceHtml = PreviousPrice > 0 ? $"<span class='text-decoration-line-through text-danger'>{string.Format("{0:C}", CurrentPrice)}</span>" : string.Empty;
+            string currentPriceHtml = $"<span class='ms-2'>{string.Format("{0:C}", CurrentPrice)}</span>";
 
             output.TagName = "p";
             output.Content.SetHtmlContent($"Price: {previousPriceHtml} {currentPriceHtml}");

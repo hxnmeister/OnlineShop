@@ -27,6 +27,12 @@
                     <p class="mb-0">Rating: @book.Rating / 5</p>
                     <price current-price="@book.Price" previous-price="@book.PreviousPrice"></price>
                 </a>
+
+                <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                    <input type="hidden" name="bookId" value="@book.Id" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn btn-primary"><img src="~/images/cart.png" style="width: 25px" /></button>
+                </form>
             </div>
         }
     </div>
