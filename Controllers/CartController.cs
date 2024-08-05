@@ -25,7 +25,7 @@ namespace OnlineShop.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost(template: "cart/add")]
         public async Task<IActionResult> AddToCart(int bookId, int quantity)
         {
             var book = await _context.Books.Include(b => b.BooksImages).FirstOrDefaultAsync(b => b.Id == bookId);
@@ -40,7 +40,7 @@ namespace OnlineShop.Controllers
             return RedirectToAction("Index", "Books");
         }
 
-        [HttpPost]
+        [HttpPost(template: "cart/remove")]
         public IActionResult RemoveFromCart(int bookId) 
         {
             _cartService.RemoveItem(bookId);
@@ -48,8 +48,14 @@ namespace OnlineShop.Controllers
             return RedirectToAction("Index", "Cart");
         }
 
-        [HttpGet]
+        [HttpGet(template: "cart/checkout")]
         public IActionResult Checkout()
+        {
+            return View();
+        }
+
+        [HttpPost(template: "cart/checkout")]
+        public IActionResult CheckoutResult()
         {
             return View();
         }

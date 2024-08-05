@@ -1,4 +1,36 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Checkout";
 }
+
+<div class="container p-3 mb-5 border border-5 border-info-subtle rounded">
+    <h3>Cart:</h3>
+    @foreach (var item in cartService.CartItems)
+    {
+        <div class="container border-bottom">
+            <p>x @item.Quantity - <b>@item.Book.Author</b> @item.Book.Title</p>
+        </div>
+    }
+</div>
+
+<div class="container m-5">
+    <form asp-action="CheckoutResult" asp-controller="Cart" method="post">
+        <div class="form-floating mb-3">
+            <input type="text" id="FullName" name="FullName" class="form-control" placeholder="Enter name..." />
+            <label for="FullName">Full Name:</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" placeholder="Enter phone..." />
+            <label for="PhoneNumber">Phone Number:</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+            <input type="email" id="Email" name="Email" class="form-control" placeholder="Enter email..." />
+            <label for="Email">Email:</label>
+        </div>
+
+        <hr />
+
+        <input type="submit" value="Send" class="btn btn-outline-success" />
+    </form>
+</div>
