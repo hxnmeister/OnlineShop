@@ -53,7 +53,6 @@ namespace OnlineShop.Controllers
 
                 User newUser = new()
                 {
-                    Id = (int)(user.Id == null ? _context.Users.Count() + 1 : user.Id),
                     Login = user.Login,
                     Password = user.Password,
                     FirstName = user.FirstName, 

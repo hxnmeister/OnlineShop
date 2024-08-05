@@ -37,6 +37,11 @@ namespace OnlineShop.Services.Implementations
             }
         }
 
+        public void Clear()
+        {
+            CartItems.Clear();
+        }
+
         public decimal GetTotalPrice()
         {
             return CartItems.Sum(i => i.Quantity * i.Book.Price);

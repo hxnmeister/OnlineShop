@@ -9,5 +9,6 @@ namespace OnlineShop.Services
         int AddItem(CartItem cartItem);
         void RemoveItem(int bookId);
         decimal GetTotalPrice();
+        void Clear();
     }
 }

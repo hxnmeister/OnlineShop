@@ -57,6 +57,8 @@ namespace OnlineShop.Controllers
         [HttpPost(template: "cart/checkout")]
         public IActionResult CheckoutResult()
         {
+            _cartService.Clear();
+
             return View();
         }
     }
